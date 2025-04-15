@@ -15,12 +15,6 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static('public'));
 
-/* Listening */
-app.listen(port, () => {
-    console.log(`Server is running on port http://localhost:${port}`);
-
-});
-
 /* Routes */
 app.get('/', (req, res) => {
     res.send('Welcome on our server')
@@ -31,3 +25,9 @@ app.use('/api/v1/movies', moviesRouter)
 app.use(serverError)
 
 app.use(error404)
+
+/* Listening */
+app.listen(port, () => {
+    console.log(`Server is running on port http://localhost:${port}`);
+
+});
