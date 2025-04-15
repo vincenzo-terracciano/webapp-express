@@ -3,6 +3,10 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 
+const moviesRouter = require('./routers/movies');
+const serverError = require('./middlewares/serverError');
+const error404 = require('./middlewares/error404')
+
 /* Middlewares */
 app.use(cors({
     origin: process.env.FRONT_URL
@@ -22,13 +26,8 @@ app.get('/', (req, res) => {
     res.send('Welcome on our server')
 });
 
-/* Index */
-app.get('/api/v1/movies', (req, res) => {
-    res.json({ message: 'List of movies' })
-})
+app.use('/api/v1/movies', moviesRouter)
 
-/* Show */
-app.get('/api/v1/movies/:id', (req, res) => {
-    const { id } = req.params
-    res.json({ message: `List of movies with id: ${id}` })
-})
+app.use(serverError)
+
+app.use(error404)
