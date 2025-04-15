@@ -4,11 +4,19 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
     "dev": "node --watch --env-file=.env server.js"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincenzo-terracciano/webapp-express.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincenzo-terracciano/webapp-express/issues"
+  },
+  "homepage": "https://github.com/vincenzo-terracciano/webapp-express#readme",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
