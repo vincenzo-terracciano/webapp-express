@@ -9,7 +9,8 @@ const error404 = require('./middlewares/error404')
 
 /* Middlewares */
 app.use(cors({
-    origin: process.env.FRONT_URL
+    origin: 'http://localhost:5173',
+    credentials: true
 }));
 
 app.use(express.json());
@@ -22,12 +23,26 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/movies', moviesRouter)
 
-app.use(serverError)
-
-app.use(error404)
-
 /* Listening */
 app.listen(port, () => {
     console.log(`Server is running on port http://localhost:${port}`);
 
 });
+
+app.post('/register', (req, res) => {
+
+    const data = req.body;
+    console.log(data);
+    res.json(data)
+})
+
+app.post('/login', (req, res) => {
+
+    const data = req.body;
+    console.log(data);
+    res.json(data)
+})
+
+/* Middleware to manage errors */
+app.use(serverError)
+app.use(error404)

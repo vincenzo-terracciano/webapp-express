@@ -54,8 +54,29 @@ function store(req, res) {
     })
 }
 
+function create(req, res) {
+
+    console.log("req.file:", req.file);
+
+    // Get the data from the request
+    const { title, director, genre, abstract, release_year } = req.body;
+    const image = req.file.filename;
+
+    // prepare the sql query to insert the movie
+    const sql = 'INSERT INTO movies (title, director, genre, abstract, release_year, image) VALUES (?, ?, ?, ?, ?, ?)'
+    const values = [title, director, genre, abstract, release_year, image]
+
+    connection.query(sql, values, (err, results) => {
+        if (err) return res.status(500).json({ success: false, error: err.message })
+
+        console.log(results);
+        return res.status(201).json({ success: true, message: 'Movie created successfully', movieId: results.insertId })
+    })
+}
+
 module.exports = {
     index,
     show,
-    store
+    store,
+    create
 }
